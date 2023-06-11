@@ -1,0 +1,36 @@
+activities:
+  - id: A
+    name: Activity A
+    duration: 7
+    dependencies:
+  - id: B
+    name: Activity B
+    duration: 9
+    dependencies:
+  - id: C
+    name: Activity C
+    duration: 12
+    dependencies:
+      - A
+  - id: D
+    name: Activity D
+    duration: 8
+    dependencies:
+      - A
+      - B
+  - id: E
+    name: Activity E
+    duration: 9
+    dependencies:
+      - D
+  - id: F
+    name: Activity F
+    duration: 6
+    dependencies:
+      - C
+      - E
+  - id: G
+    name: Activity G
+    duration: 5
+    dependencies:
+      - E
