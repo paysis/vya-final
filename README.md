@@ -9,3 +9,7 @@ You can also install WSL 2 on your machine to make Docker run on WSL instead of 
 # while cd'ed into parent directory of the project, execute on Linux or WSL
 cd util && bash build.sh && bash run.sh "example.yaml"
 ```
+
+`build.sh` file builds a docker image of this application to compile and to run and it also embeds dependencies like [yaml-cpp](https://github.com/jbeder/yaml-cpp), ensuring cross-platform usability.
+
+`run.sh` file takes a single input argument that should be the file names of the yaml files (extension included) which reside in `config` directory. It runs the pre-built image of this application with given file name input.
