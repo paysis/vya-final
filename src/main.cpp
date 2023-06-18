@@ -16,7 +16,6 @@ public:
     vector<Activity*> predecessors;
     unordered_set<Activity*> checked_predecessors;
     unordered_set<Activity*> checked_successors;
-    // unordered_map<Activity*, int> checked_predecessors;
     vector<Activity*> successors;
     int earliestStartTime;
     int earliestFinishTime;
@@ -144,6 +143,24 @@ public:
         }
     }
 
+    void printSPCT(){
+        cout << "Shortest Path Computation Time: " << earliestTotalFinishTime << endl;
+    }
+
+    void printAllEST(){
+        cout << "All Earliest Start Times:" << endl;
+        for (auto& v : vertices) {
+            cout << "\n" << "(" << v->id << ") " << v->name << "\n\tEST: " << v->earliestStartTime << endl;
+        }
+    }
+
+    void printAllLST(){
+        cout << "All Latest Start Times:" << endl;
+        for (auto& v : vertices) {
+            cout << "\n" << "(" << v->id << ") " << v->name << "\n\tLST: " << v->latestStartTime << endl;
+        }
+    }
+
     void printCriticalPath() {
         cout << "Critical Path: ";
         bool firstOne = true;
@@ -152,7 +169,7 @@ public:
                 if(!firstOne){
                     cout << " -> ";
                 } // to make output look a little bit more pretty
-                
+
                 cout << "(" << v->id << ") " << v->name;
                 firstOne = false;
             }
@@ -241,52 +258,14 @@ int main(int argc, char** argv) {
     string argv1_str(argv[1]);
     Graph* g = YAMLParser("../shared/" + argv1_str).parse();
 
-    // Activity* a = new Activity("A", 7);
-    // Activity* b = new Activity("B", 9);
-    // Activity* c = new Activity("C", 12);
-    // Activity* d = new Activity("D", 8);
-    // Activity* e = new Activity("E", 9);
-    // Activity* f = new Activity("F", 6);
-    // Activity* g1 = new Activity("G", 5);
-
-    // a->successors.push_back(c);
-    // c->predecessors.push_back(a);
-
-    // a->successors.push_back(d);
-    // d->predecessors.push_back(a);
-
-    // b->successors.push_back(d);
-    // d->predecessors.push_back(b);
-
-    // c->successors.push_back(f);
-    // f->predecessors.push_back(c);
-
-    // d->successors.push_back(e);
-    // e->predecessors.push_back(d);
-
-    // e->successors.push_back(f);
-    // f->predecessors.push_back(e);
-
-    // e->successors.push_back(g1);
-    // g1->predecessors.push_back(e);
-
-    // g.addActivity(a);
-    // g.addActivity(b);
-    // g.addActivity(c);
-    // g.addActivity(d);
-    // g.addActivity(e);
-    // g.addActivity(f);
-    // g.addActivity(g1);
-
     g->calculateET();
     g->calculateLT();
 
     // Display
 
-    // show SPCT (?)
-
-    // print each vertice's name, duration, ES, EF, LS, LF, slack with tabs
-    // print critical path
+    g->printSPCT();
+    g->printAllEST();
+    g->printAllLST();
     g->printCriticalPath();
 
     return 0;
